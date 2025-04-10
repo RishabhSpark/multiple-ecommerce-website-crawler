@@ -1,9 +1,9 @@
 name: Run Web Scraper
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
   schedule:
-    - cron: '0 6 * * *'  # Runs every day at 6 AM UTC
+    - cron: '0 6 * * *'
 
 jobs:
   scrape:
@@ -23,15 +23,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Chromium (headless)
+    - name: Install Google Chrome
       run: |
-        sudo apt-get update
-        sudo apt-get install -y chromium-browser chromium-chromedriver
-        sudo ln -s /usr/bin/chromium-browser /usr/bin/chrome
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
     - name: Run scraper
       env:
-        CHROME_BIN: /usr/bin/chromium-browser
+        CHROME_BIN: /usr/bin/google-chrome
       run: python scraper_main.py
 
     - name: Commit CSV output
