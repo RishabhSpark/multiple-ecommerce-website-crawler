@@ -1,0 +1,43 @@
+name: Run Web Scraper
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    - cron: '0 6 * * *'  # Runs every day at 6 AM UTC
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install Chromium (headless)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser chromium-chromedriver
+        sudo ln -s /usr/bin/chromium-browser /usr/bin/chrome
+
+    - name: Run scraper
+      env:
+        CHROME_BIN: /usr/bin/chromium-browser
+      run: python scraper_main.py
+
+    - name: Commit CSV output
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add *.csv
+        git commit -m "Update scraped product links" || echo "No changes to commit"
+        git push

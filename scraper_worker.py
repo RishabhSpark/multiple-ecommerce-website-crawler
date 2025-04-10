@@ -146,6 +146,18 @@ def create_driver():
     driver = webdriver.Chrome(service=service, options=options)
     return driver
 
+def create_driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Required for GitHub Actions
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
+    options.binary_location = "/usr/bin/chromium-browser"  # Required for GitHub Actions
+    service = Service("/usr/bin/chromedriver")             # GitHub Actions path
+    return webdriver.Chrome(service=service, options=options)
+
 def scrape_website(config):
     driver = create_driver()
     product_links = set()
