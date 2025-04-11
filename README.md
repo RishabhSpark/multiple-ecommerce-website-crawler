@@ -23,7 +23,7 @@ Install the dependencies with:
 
 ```bash
 pip install -r requirements.txt
-
+```
 
 ### Github Actions
 This workflow runs when triggered manually on GitHub under Actions → Run workflow.
