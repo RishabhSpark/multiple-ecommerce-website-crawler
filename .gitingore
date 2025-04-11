@@ -1,0 +1,58 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# VS Code & PyCharm
+.vscode/
+.idea/
+
+# MacOS & Linux
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*~
+
+# Selenium / ChromeDriver logs
+chromedriver.log
+geckodriver.log
+
+# Output files
+*.csv
+output/
+logs/
+*.log
+
+# Jupyter notebooks (optional)
+.ipynb_checkpoints/
+
+# dotenv environment vars (if using)
+.env
+
+# GitHub Actions artifacts (if any)
+*.zip
+*.tar.gz
+*.tar
+*.7z

@@ -132,21 +132,6 @@ import time
 print_lock = threading.Lock()
 
 def create_driver():
-    """Create and configure Chrome WebDriver instance."""
-    options = webdriver.ChromeOptions()
-    options.add_argument('--disable-blink-features=AutomationControlled')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("start-maximized")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36")
-    # options.add_argument('--headless')  # Uncomment if needed
-    options.accept_insecure_certs = True
-
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
-    return driver
-
-def create_driver():
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # Required for GitHub Actions
     options.add_argument('--no-sandbox')
